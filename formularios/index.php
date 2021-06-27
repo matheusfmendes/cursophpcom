@@ -11,24 +11,30 @@ if(isset($_POST['enviar-formulario'])):
 //    $peso = $_POST['peso'];
 //    $ip = $_POST['ip'];
 //    $url = $_POST['url'];
+
 //Validacao
-    if(!$idade = filter_input(INPUT_POST, 'idade', FILTER_VALIDATE_INT)):
+    $idade = filter_input(INPUT_POST, 'idade', FILTER_SANITIZE_NUMBER_INT);
+    if(!filter_var($idade, FILTER_VALIDATE_INT)):
         $erros[] = "Idade precisa ser um inteiro";
     endif;
 
-    if(!$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)):
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
         $erros[] = "Email invalido";
     endif;
 
-    if(!$peso = filter_input(INPUT_POST, 'peso', FILTER_VALIDATE_FLOAT)):
+    $peso = filter_input(INPUT_POST, 'peso', FILTER_SANITIZE_NUMBER_FLOAT);
+    if(!filter_var($peso, 'peso', FILTER_VALIDATE_FLOAT)):
         $erros[] = "Peso precisa ser um float";
     endif;
 
-    if(!$ip = filter_input(INPUT_POST, 'ip', FILTER_VALIDATE_IP)):
+    $ip = filter_input(INPUT_POST, 'ip', FILTER_SANITIZE_NUMBER_FLOAT);
+    if(!filter_var(INPUT_POST, 'ip', FILTER_VALIDATE_IP)):
         $erros[] = "Ip invalido";
     endif;
 
-    if(!$url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL)):
+    if(!$url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL));
+    if(!filter_var(INPUT_POST, 'url', FILTER_VALIDATE_URL)):
         $erros[] = "Url invalida";
     endif;
 
